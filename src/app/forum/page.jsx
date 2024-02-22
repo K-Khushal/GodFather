@@ -5,6 +5,7 @@ import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
 import {Avatar} from "@nextui-org/react";
+import Image from "next/image";
 export default function App() {
 
     const [username, setUsername] = useState("Jane Smith");
@@ -90,7 +91,7 @@ export default function App() {
                 <div className="flex-1 flex flex-col p-4 overflow-y-auto">
                     <div className="grid gap-4">
                         <div className="flex items-start gap-4">
-                            <img
+                            <Image
                                 alt="Profile picture"
                                 className="rounded-full"
                                 height="40"
@@ -112,11 +113,11 @@ export default function App() {
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
-                            <img
+                            <Image
                                 alt="Profile picture"
                                 className="rounded-full"
                                 height="40"
-                                src="/placeholder.svg"
+                                src=""
                                 style={{
                                     aspectRatio: "40/40",
                                     objectFit: "cover",
@@ -129,16 +130,16 @@ export default function App() {
                                     <div className="text-sm text-gray-500 dark:text-gray-400">5 minutes ago</div>
                                 </div>
                                 <div className="text-sm">
-                                    Hey! Yes, I've got the report ready. I'll send it over to you in the next 10 minutes.
+                                    Hey! Yes, Ive got the report ready. Ill send it over to you in the next 10 minutes.
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
-                            <img
+                            <Image
                                 alt="Profile picture"
                                 className="rounded-full"
                                 height="40"
-                                src="/placeholder.svg"
+                                src=""
                                 style={{
                                     aspectRatio: "40/40",
                                     objectFit: "cover",
@@ -151,8 +152,8 @@ export default function App() {
                                     <div className="text-sm text-gray-500 dark:text-gray-400">10 minutes ago</div>
                                 </div>
                                 <div className="text-sm">
-                                    Good morning! I hope you're having a great day so far. I wanted to remind everyone about the team
-                                    meeting at 3 pm. Don't forget to bring your ideas and enthusiasm!
+                                    Good morning! I hope your having a great day so far. I wanted to remind everyone about the team
+                                    meeting at 3 pm. Dont forget to bring your ideas and enthusiasm!
                                 </div>
                             </div>
                         </div>
