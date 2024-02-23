@@ -4,19 +4,19 @@ export default function Header() {
     return (
         <header className="flex items-center justify-between p-4 border-b lg:p-4 xl:p-6">
             <div className="flex items-center space-x-4">
-                <Link className="flex items-center space-x-2" href="#">
+                <Link className="flex items-center space-x-2" href="/">
                     <FlagIcon className="w-8 h-8" />
                     <span className="text-xl font-bold">Forum</span>
                 </Link>
             </div>
             <nav className="hidden space-x-4 lg:flex">
-                <Link className="font-medium" href="#">
+                <Link className="font-medium" href="/">
                     Home
                 </Link>
-                <Link className="font-medium" href="#">
+                <Link className="font-medium" href="/forum">
                     Forum
                 </Link>
-                <Link className="font-medium" href="#">
+                <Link className="font-medium" href="/about">
                     About
                 </Link>
             </nav>
