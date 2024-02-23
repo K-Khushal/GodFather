@@ -18,8 +18,6 @@ export default function App() {
     const [uid, setUid] = useState(localStorage.getItem('uid') || null);
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
 
-    const scroll = useRef();
-
     useEffect(() => {
         if (!uid || !username || !photoURL) {
             // Generate a random UID
