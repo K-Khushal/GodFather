@@ -1,18 +1,47 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
 import {Avatar} from "@nextui-org/react";
 import Image from "next/image";
+import { db } from "../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import MessageList from "@/app/forum/MessageList";
 export default function App() {
 
-    const [username, setUsername] = useState("Jane Smith");
+    const [username, setUsername] = useState(localStorage.getItem('username') || "");
     const [editing, setEditing] = useState(false);
     const [newUsername, setNewUsername] = useState(username);
     const [error, setError] = useState(null);
+    const [message, setMessage] = useState("");
+    const [uid, setUid] = useState(localStorage.getItem('uid') || null);
+    const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
 
+    useEffect(() => {
+        if (!uid || !username || !photoURL) {
+            // Generate a random UID
+            const randomUid = generateRandomUid();
+            setUid(randomUid);
+            localStorage.setItem('uid', randomUid);
+
+            if (!username) {
+                const randomDisplayName = `User${randomUid}`; // Modify display name here
+                setUsername(randomDisplayName);
+                localStorage.setItem('username', randomDisplayName);
+
+                const randomPhotoURL = `https://robohash.org/${username}.png`;
+                setPhotoURL(randomPhotoURL);
+                localStorage.setItem('photoURL', randomPhotoURL);
+            }
+        }
+    }, []);
+
+    const generateRandomUid = () => {
+        // Generate a random UID (for demonstration purposes only)
+        return Math.floor(Math.random() * 10000).toString();
+    };
     const handleEditClick = () => {
         setEditing(true);
     };
@@ -23,6 +52,7 @@ export default function App() {
             return;
         }
         setUsername(newUsername);
+        localStorage.setItem('username', newUsername);
         setEditing(false);
         setError(null);
     };
@@ -37,13 +67,29 @@ export default function App() {
         setNewUsername(e.target.value);
     };
 
+    const sendMessage = async (event) => {
+        event.preventDefault();
+        if (message.trim() === "") {
+            alert("Enter valid message");
+            return;
+        }
+        await addDoc(collection(db, "messages"), {
+            text: message,
+            name: username,
+            avatar: photoURL,
+            createdAt: serverTimestamp(),
+            uid,
+        });
+        setMessage("");
+    };
+
     return (
         <main className="p-5">
             <div className="flex flex-col h-[480px] rounded-lg border border-gray-200 dark:border-gray-800">
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
                     <div className="flex items-center space-x-4">
                         <div className="font-semibold flex flex-row items-center">
-                            <Avatar className="mx-2 mr-4" src={`https://robohash.org/${username}.png`} />
+                            <Avatar className="mx-2 mr-4" src={photoURL} />
                             {editing ? (
                                 <Input
                                     size="sm"
@@ -89,81 +135,13 @@ export default function App() {
                     </div>
                 </div>
                 <div className="flex-1 flex flex-col p-4 overflow-y-auto">
-                    <div className="grid gap-4">
-                        <div className="flex items-start gap-4">
-                            <Image
-                                alt="Profile picture"
-                                className="rounded-full"
-                                height="40"
-                                src={`https://robohash.org/${username}.png`}
-                                style={{
-                                    aspectRatio: "40/40",
-                                    objectFit: "cover",
-                                }}
-                                width="40"
-                            />
-                            <div className="flex-1 grid gap-1">
-                                <div className="flex items-center space-x-2">
-                                    <div className="text-sm font-medium">Jane Smith</div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">2 minutes ago</div>
-                                </div>
-                                <div className="text-sm">
-                                    Hi there! Just wanted to follow up on our conversation from yesterday. Do you have the latest numbers?
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <Image
-                                alt="Profile picture"
-                                className="rounded-full"
-                                height="40"
-                                src=""
-                                style={{
-                                    aspectRatio: "40/40",
-                                    objectFit: "cover",
-                                }}
-                                width="40"
-                            />
-                            <div className="flex-1 grid gap-1">
-                                <div className="flex items-center space-x-2">
-                                    <div className="text-sm font-medium">John Doe</div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">5 minutes ago</div>
-                                </div>
-                                <div className="text-sm">
-                                    Hey! Yes, Ive got the report ready. Ill send it over to you in the next 10 minutes.
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <Image
-                                alt="Profile picture"
-                                className="rounded-full"
-                                height="40"
-                                src=""
-                                style={{
-                                    aspectRatio: "40/40",
-                                    objectFit: "cover",
-                                }}
-                                width="40"
-                            />
-                            <div className="flex-1 grid gap-1">
-                                <div className="flex items-center space-x-2">
-                                    <div className="text-sm font-medium">Alice Johnson</div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">10 minutes ago</div>
-                                </div>
-                                <div className="text-sm">
-                                    Good morning! I hope your having a great day so far. I wanted to remind everyone about the team
-                                    meeting at 3 pm. Dont forget to bring your ideas and enthusiasm!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <MessageList />
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-800">
                     <div className="p-4">
-                        <form className="flex space-x-4">
-                            <Input className="flex-1" placeholder="Type a message" />
-                            <Button className="p-6 h-14" color="secondary">Send message</Button>
+                        <form className="flex space-x-4" onSubmit={(event) => sendMessage(event)}>
+                            <Input className="flex-1" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                            <Button className="p-6 h-14" color="secondary" type="submit">Send message</Button>
                         </form>
                     </div>
                 </div>
