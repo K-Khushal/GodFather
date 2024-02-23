@@ -1,11 +1,10 @@
 "use client";
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
 import {Avatar} from "@nextui-org/react";
-import Image from "next/image";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import MessageList from "@/app/forum/MessageList";
@@ -18,6 +17,8 @@ export default function App() {
     const [message, setMessage] = useState("");
     const [uid, setUid] = useState(localStorage.getItem('uid') || null);
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
+
+    const scroll = useRef();
 
     useEffect(() => {
         if (!uid || !username || !photoURL) {

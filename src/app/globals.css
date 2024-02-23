@@ -6,6 +6,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary: #242424;
+  --secondary: #7c7c7c;
+  --tertiary: #7a7a7a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,4 +47,24 @@ body {
   filter: blur(8px); /* Adjust the blur intensity as needed */
   opacity: 0.7; /* Adjust the opacity as needed */
   z-index: -1;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 17px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary);
 }

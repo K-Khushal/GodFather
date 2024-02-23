@@ -12,7 +12,7 @@ import Message from "@/app/forum/Message";
 export default function MessageList() {
 
     const [messages, setMessages] = useState([]);
-    const scroll = useRef();
+
 
     useEffect(() => {
         const q = query(
