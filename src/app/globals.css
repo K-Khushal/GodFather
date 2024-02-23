@@ -45,3 +45,7 @@ body {
   opacity: 0.7; /* Adjust the opacity as needed */
   z-index: -1;
 }
+
+.spin {
+  animation: spin 5s linear infinite;
+}

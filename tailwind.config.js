@@ -1,6 +1,13 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
 /** @type {import('tailwindcss').Config} */
 // tailwind.config.js
-const {nextui} = require("@nextui-org/react");
+const { nextui } = require("@nextui-org/react");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -15,10 +22,26 @@ module.exports = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
-            "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    nextui(),
+    require("@tailwindcss/aspect-ratio"),
+    addVariablesForColors,
+  ],
 };
+
+
+function addVariablesForColors({ addBase, theme }) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
