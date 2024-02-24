@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     query,
     collection,
@@ -12,6 +12,13 @@ import Message from "@/app/forum/Message";
 export default function MessageList() {
 
     const [messages, setMessages] = useState([]);
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
 
     useEffect(() => {
@@ -34,11 +41,15 @@ export default function MessageList() {
         return () => unsubscribe;
     }, []);
 
+    useEffect(scrollToBottom, [messages]);
+
     return (
         <div className="grid gap-4">
             {messages?.map((message) => (
                 <Message key={message.id} message={message} />
             ))}
+
+            <div ref={messagesEndRef} />
         </div>
     );
 }
