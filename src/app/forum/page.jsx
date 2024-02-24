@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
@@ -16,7 +16,6 @@ export default function App() {
     const [uid, setUid] = useState(localStorage.getItem('uid') || null);
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
     const scroll = useRef();
-    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {

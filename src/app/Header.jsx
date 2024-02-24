@@ -3,8 +3,6 @@
 import { usePathname } from "next/navigation";
 import React from "react";
 import { nav_items } from "@/constants";
-import Link from "next/link";
-import { FaUserGroup } from "react-icons/fa6";
 
 
 export default function Header() {
