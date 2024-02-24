@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-export default function SendMessage({ username, photoURL, uid }) {
+export default function SendMessage({ username, photoURL, uid, scroll }) {
     const [message, setMessage] = useState("");
     const [error, setError] = useState(null);
 
@@ -22,6 +22,7 @@ export default function SendMessage({ username, photoURL, uid }) {
             uid,
         });
         setMessage("");
+        scroll.current.scrollIntoView({ behavior: "smooth" });
     };
 
     return (

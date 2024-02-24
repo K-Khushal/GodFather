@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
@@ -15,6 +15,8 @@ export default function App() {
     const [error, setError] = useState(null);
     const [uid, setUid] = useState(localStorage.getItem('uid') || null);
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
+    const scroll = useRef();
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -144,9 +146,10 @@ export default function App() {
                 </div>
                 <div className="flex-1 flex flex-col p-4 overflow-y-auto">
                     <MessageList />
+                    <span ref={scroll}></span>
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-800">
-                    <SendMessage username={username} uid={uid} photoURL={photoURL} />
+                    <SendMessage username={username} uid={uid} photoURL={photoURL} scroll={scroll}/>
                 </div>
             </div>
         </main>

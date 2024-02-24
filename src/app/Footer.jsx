@@ -1,7 +1,7 @@
 
 export default function Footer() {
     return (
-        <footer className="flex items-center justify-center w-full py-4 border-t">
+        <footer className="flex items-center justify-center w-full py-2">
             <div className="flex items-center space-x-4">
                 <nav className="flex items-center space-x-4">
                     {/*<Link className="font-medium" href="#">*/}
@@ -13,7 +13,7 @@ export default function Footer() {
                     {/*<Link className="font-medium" href="#">*/}
                     {/*    Contact*/}
                     {/*</Link>*/}
-                    <p>Made with ❤️-da by GDSC</p>
+                    <p>Made with ❤️ by GDSC</p>
                 </nav>
                 {/*<div className="flex items-center space-x-2">*/}
                 {/*    <Link className="text-2xl font-bold" href="#">*/}
