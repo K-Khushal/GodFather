@@ -46,7 +46,7 @@ export default function Message({ message }) {
             />
             <div className="flex-1 grid gap-1">
                 <div className="flex items-center space-x-2">
-                    <div className="text-sm font-medium">{message.name}</div>
+                    <div className={`text-sm font-medium ${message.name === "itzKhushal" ? "text-red-500" : ""}`}>{message.name}</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">{timeAgo}</div>
                 </div>
                 <div className="text-sm">

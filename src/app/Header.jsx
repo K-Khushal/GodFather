@@ -10,7 +10,7 @@ import { FaUserGroup } from "react-icons/fa6";
 export default function Header() {
   const path = usePathname();
   return (
-    <nav className="flex justify-between items-center h-24 px-24 bg-black text-slate-500 shadow-slate-500 shadow-2xl">
+    <nav className="flex justify-between items-center h-24 px-24 bg-black text-slate-500 shadow-slate-500">
       <div className="flex items-center">
         <img src="/1.png" alt="Forum" className="h-16 mr-4" />
         <span className="text-2xl satisfy font-bold capitalise">Forum</span>

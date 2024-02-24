@@ -5,34 +5,41 @@ import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
 import {Avatar} from "@nextui-org/react";
-import { db } from "../firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import MessageList from "@/app/forum/MessageList";
+import SendMessage from "@/app/forum/SendMessage";
 export default function App() {
 
     const [username, setUsername] = useState(localStorage.getItem('username') || "");
     const [editing, setEditing] = useState(false);
     const [newUsername, setNewUsername] = useState(username);
     const [error, setError] = useState(null);
-    const [message, setMessage] = useState("");
     const [uid, setUid] = useState(localStorage.getItem('uid') || null);
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
 
     useEffect(() => {
-        if (!uid || !username || !photoURL) {
-            // Generate a random UID
-            const randomUid = generateRandomUid();
-            setUid(randomUid);
-            localStorage.setItem('uid', randomUid);
+        if (typeof window !== 'undefined') {
+            const localUsername = localStorage.getItem('username') || "";
+            setUsername(localUsername);
+            const localUid = localStorage.getItem('uid') || null;
+            setUid(localUid);
+            const localPhotoURL = localStorage.getItem('photoURL') || "";
+            setPhotoURL(localPhotoURL);
 
-            if (!username) {
-                const randomDisplayName = `User${randomUid}`; // Modify display name here
-                setUsername(randomDisplayName);
-                localStorage.setItem('username', randomDisplayName);
+            if (!uid || !username || !photoURL) {
+                // Generate a random UID
+                const randomUid = generateRandomUid();
+                setUid(randomUid);
+                localStorage.setItem('uid', randomUid);
 
-                const randomPhotoURL = `https://robohash.org/${username}.png`;
-                setPhotoURL(randomPhotoURL);
-                localStorage.setItem('photoURL', randomPhotoURL);
+                if (!username) {
+                    const randomDisplayName = `User${randomUid}`; // Modify display name here
+                    setUsername(randomDisplayName);
+                    localStorage.setItem('username', randomDisplayName);
+
+                    const randomPhotoURL = `https://robohash.org/${username}.png`;
+                    setPhotoURL(randomPhotoURL);
+                    localStorage.setItem('photoURL', randomPhotoURL);
+                }
             }
         }
     }, []);
@@ -50,8 +57,26 @@ export default function App() {
             setError("Username cannot be empty");
             return;
         }
+        else if (!/^[a-zA-Z0-9]+$/.test(newUsername.trim())) {
+            setError("Username cannot contain special characters");
+            return;
+        }
+        else if (newUsername.trim().toLowerCase() === "itzkhushal") {
+            setError("This username is not allowed");
+            return;
+        }
         setUsername(newUsername);
         localStorage.setItem('username', newUsername);
+
+        let photoURL;
+        if (username.toLowerCase() === "itzkhushal") {
+            photoURL = `https://live.staticflickr.com/5511/14407668681_2657ca01fe_m.jpg`
+        } else {
+            photoURL = `https://robohash.org/${username}.png`;
+        }
+        setPhotoURL(photoURL);
+        localStorage.setItem('photoURL', photoURL);
+
         setEditing(false);
         setError(null);
     };
@@ -64,22 +89,6 @@ export default function App() {
 
     const handleChange = (e) => {
         setNewUsername(e.target.value);
-    };
-
-    const sendMessage = async (event) => {
-        event.preventDefault();
-        if (message.trim() === "") {
-            alert("Enter valid message");
-            return;
-        }
-        await addDoc(collection(db, "messages"), {
-            text: message,
-            name: username,
-            avatar: photoURL,
-            createdAt: serverTimestamp(),
-            uid,
-        });
-        setMessage("");
     };
 
     return (
@@ -137,12 +146,7 @@ export default function App() {
                     <MessageList />
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-800">
-                    <div className="p-4">
-                        <form className="flex space-x-4" onSubmit={(event) => sendMessage(event)}>
-                            <Input className="flex-1" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)}/>
-                            <Button className="p-6 h-14" color="secondary" type="submit">Send message</Button>
-                        </form>
-                    </div>
+                    <SendMessage username={username} uid={uid} photoURL={photoURL} />
                 </div>
             </div>
         </main>
