@@ -1,4 +1,5 @@
 import {team_details} from "@/constants/team";
+import Image from "next/image";
 
 export default function Team() {
     return (
@@ -11,11 +12,11 @@ export default function Team() {
 
                     {team_details.map((teamMember, index) => (
                         <div key={index} className="p-6 rounded-lg flex flex-col items-center">
-                            <img
+                            <Image
                                 alt={teamMember.name}
                                 className="rounded-full mb-4"
                                 height="228"
-                                src={teamMember.image}
+                                src={`/${teamMember.image}`}
                                 style={{
                                     aspectRatio: "128/128",
                                     objectFit: "cover",
