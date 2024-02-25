@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Team() {
     return (
-        <div className="py-12">
+        <div className="py-12 bg-black text-white">
             <div className="container mx-auto px-4">
                 <div className="text-center pb-4">
                     <h2 className="text-4xl font-semibold tracking-wide">Meet our team!</h2>

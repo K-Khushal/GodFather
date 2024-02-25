@@ -28,9 +28,9 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
 
     return (
         <div className="p-4">
-            <form className="flex space-x-4" onSubmit={(event) => sendMessage(event)}>
+            <form className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4" onSubmit={(event) => sendMessage(event)}>
                 <Input className="flex-1" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)} errorMessage={error}/>
-                <Button className="p-6 h-14" color="secondary" type="submit">Send message
+                <Button className="w-full sm:w-auto h-14" color="secondary" type="submit">Send message
                     {/*<SendIcon/>*/}
                 </Button>
             </form>

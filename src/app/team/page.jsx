@@ -1,6 +1,6 @@
 "use client";
 
-import Team from "@/app/about/Team";
+import Team from "@/app/team/Team";
 
 export default function About() {
     return (
