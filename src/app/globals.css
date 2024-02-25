@@ -29,7 +29,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.hollow{
+.hollow-text{
   -webkit-text-stroke: 0.5px black; 
   color: transparent;
 }
