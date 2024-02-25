@@ -19,7 +19,7 @@ export default function App() {
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
     const scroll = useRef();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [hasOpenedBefore, setHasOpenedBefore] = useState(false);
+    // const [hasOpenedBefore, setHasOpenedBefore] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -170,26 +170,26 @@ export default function App() {
                 <div className="border-t border-gray-200 dark:border-gray-800">
                     <SendMessage username={username} uid={uid} photoURL={photoURL} scroll={scroll}/>
                 </div>
-                        <Modal isOpen={isOpen} onClose={onClose}>
-                            <ModalContent>
-                                <>
-                                    <ModalHeader className="flex flex-col gap-1">Warning: Respectful Communication Policy</ModalHeader>
-                                    <ModalBody>
-                                        <p>
-                                            Please refrain from using offensive language, religious content, or anything that may hurt others. Treat everyone with kindness and respect. Let's create a positive and inclusive environment together. Thank you for your cooperation.
-                                        </p>
-                                    </ModalBody>
-                                    <ModalFooter>
-                                        <Button color="danger" variant="light" onPress={onClose}>
-                                            I disagree
-                                        </Button>
-                                        <Button color="primary" onPress={onClose}>
-                                            I agree
-                                        </Button>
-                                    </ModalFooter>
-                                </>
-                            </ModalContent>
-                        </Modal>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalContent>
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Warning: Respectful Communication Policy</ModalHeader>
+                            <ModalBody>
+                                <p>
+                                    Please refrain from using offensive language, religious content, or anything that may hurt others. Treat everyone with kindness and respect. Lets create a positive and inclusive environment together. Thank you for your cooperation.
+                                </p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    I disagree
+                                </Button>
+                                <Button color="primary" onPress={onClose}>
+                                    I agree
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    </ModalContent>
+                </Modal>
             </div>
         </main>
     );
