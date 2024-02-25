@@ -125,11 +125,11 @@ export default function App() {
 
     return (
         <main className="p-5 bg-black text-white">
-            <div className="flex flex-col h-screen sm:h-[495px]  rounded-lg border border-gray-200 dark:border-gray-800">
+            <div className="flex flex-col md:h-[495px] h-screen rounded-lg border border-gray-200 dark:border-gray-800">
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
                     <div className="flex flex-col sm:flex-row sm:justify-center items-center space-x-4">
                         <div className="font-semibold flex items-center">
-                            <Avatar className="mx-2 mr-4" src={photoURL} />
+                            <Avatar className="mx-1 md:mx-2 mr-2 md:mr-4" src={photoURL} />
                             {editing ? (
                                 <Input
                                     size="sm"
@@ -143,7 +143,7 @@ export default function App() {
                             )}
                         </div>
                         {editing ? (
-                            <div className="flex justify-center items-center gap-2">
+                            <div className="flex justify-center items-center gap-2 mt-4 pl-6 md:pl-0 md:mt-0">
                                 <Button
                                     size="lg"
                                     color="success"
@@ -162,7 +162,8 @@ export default function App() {
                         ) : (
                             <Button
                                 onClick={handleEditClick}
-                                radius="full" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+                                radius="full" className="bg-gradient-to-tr
+                                 from-pink-500 to-yellow-500 mt-2 md:mt-0 text-white shadow-lg"
                             >
                                 Change username
                             </Button>
