@@ -1,7 +1,7 @@
 
 export default function Footer() {
     return (
-        <footer className="flex items-center justify-center w-full py-2">
+        <footer className="bg-black flex items-center justify-center w-full py-2 text-white">
             <div className="flex items-center pb-6">
                     <p>Made with ❤️ by GDSC</p>
             </div>

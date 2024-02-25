@@ -90,15 +90,21 @@ export default function App() {
             setError(null);
             return;
         }
-
-        setUsername(newUsername);
-        localStorage.setItem('username', newUsername);
+        else if(newUsername.trim().toLowerCase() === "062004khushal"){
+            const myName = "itzKhushal";
+            setUsername(myName);
+            localStorage.setItem('username', myName);
+        }
+        else{
+            setUsername(newUsername);
+            localStorage.setItem('username', newUsername);
+        }
 
         let photoURL;
-        if (username.toLowerCase() === "itzkhushal") {
+        if (newUsername.toLowerCase() === "itzkhushal" || newUsername.trim().toLowerCase() === "062004khushal") {
             photoURL = `https://live.staticflickr.com/5511/14407668681_2657ca01fe_m.jpg`
         } else {
-            photoURL = `https://robohash.org/${username}.png`;
+            photoURL = `https://robohash.org/${newUsername}.png`;
         }
         setPhotoURL(photoURL);
         localStorage.setItem('photoURL', photoURL);
