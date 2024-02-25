@@ -3,12 +3,14 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button, MovingBorder } from "@/components/ui/moving-border";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import Image from "next/image";
+import { FaArrowRight } from "react-icons/fa6";
+
 
 export default function Home() {
   return (
     <main className="relative flex min-h-screen md:min-h-1 flex-col items-center justify-between px-24 md:py-8">
       {/* <div className="backdrop-blur-md absolute inset-0" /> */}
-      <div className="flex flex-col md:flex-row w-full mt-20 md:mt-0 gap-20 justify-center md:justify-between items-center z-10">
+      <div className="flex flex-col md:flex-row w-full mt-20 md:mt-0  justify-center md:justify-between items-center z-10">
         {/* <MovingBorder duration={1} rx="30%" ry="30%">
           <div className="bg-gray-600/50 uppercase font-bold rounded-3xl w-[750px] p-10 text-white text-8xl">
             developer KHandelwal
@@ -16,11 +18,11 @@ export default function Home() {
         </MovingBorder> */}
         <div
           className=" uppercase font-bold
-            rounded-3xl  md:w-[750px] text-white text-8xl"
+            rounded-3xl  md:w-[650px] text-white w-full"
         >
           <Button
             borderRadius="1rem"
-            className="uppercase md:p-10 flex flex-col hollow-text"
+            className="uppercase md:p-10 flex flex-col "
           >
             <TypewriterEffectSmooth
               words={[
@@ -31,7 +33,7 @@ export default function Home() {
                   text: "Carnival",
                 },
               ]}
-              className=" text-3xl md:text-8xl"
+              className="px-4 text-3xl md:text-7xl"
             />
             {/* <TypewriterEffectSmooth
               words={[
@@ -42,6 +44,14 @@ export default function Home() {
               className="text-8xl"
             /> */}
           </Button>
+          <div className="m-2 my-10 flex">
+            <a
+              href="https://gdsc.community.dev/events/details/developer-student-clubs-swarrnim-startup-innovation-university-gandhinagar-presents-cloud-carnival/"
+              className="p-4 bg-secondary rounded-2xl flex gap-2 items-center w-"
+            >
+              Register <FaArrowRight size={16}/>
+            </a>
+          </div>
         </div>
         <CardContainer className="inter-var relative w-64 h-64 md:w-80 md:h-80 bg-cover">
           <CardBody className="bg-gray-700/40 h-full rounded-3xl">
