@@ -11,12 +11,12 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure}
 
 export default function App() {
 
-    const [username, setUsername] = useState(localStorage.getItem('username') || "");
+    const [username, setUsername] = useState("");
     const [editing, setEditing] = useState(false);
     const [newUsername, setNewUsername] = useState(username);
     const [error, setError] = useState(null);
-    const [uid, setUid] = useState(localStorage.getItem('uid') || null);
-    const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
+    const [uid, setUid] = useState(null);
+    const [photoURL, setPhotoURL] = useState("");
     const scroll = useRef();
     const { isOpen, onOpen, onClose } = useDisclosure();
     // const [hasOpenedBefore, setHasOpenedBefore] = useState(false);
@@ -30,24 +30,29 @@ export default function App() {
             const localPhotoURL = localStorage.getItem('photoURL') || "";
             setPhotoURL(localPhotoURL);
 
-            if (!uid || !username || !photoURL) {
+            if (!localUid) {
                 // Generate a random UID
                 const randomUid = generateRandomUid();
                 setUid(randomUid);
                 localStorage.setItem('uid', randomUid);
+            }
 
-                if (!username) {
-                    const randomDisplayName = `User${randomUid}`; // Modify display name here
-                    setUsername(randomDisplayName);
-                    localStorage.setItem('username', randomDisplayName);
-
-                    const randomPhotoURL = `https://robohash.org/${username}.png`;
-                    setPhotoURL(randomPhotoURL);
-                    localStorage.setItem('photoURL', randomPhotoURL);
+            if (!localUsername) {
+                if (!uid) {
+                    return; // Wait for uid to be set
                 }
+
+                // Generate a random username and photoURL
+                const randomDisplayName = `User${uid}`; // Modify display name here
+                setUsername(randomDisplayName);
+                localStorage.setItem('username', randomDisplayName);
+
+                const randomPhotoURL = `https://robohash.org/${randomDisplayName}.png`;
+                setPhotoURL(randomPhotoURL);
+                localStorage.setItem('photoURL', randomPhotoURL);
             }
         }
-    }, []);
+    }, [uid]);
 
     useEffect(() => {
         // const hasOpened = localStorage.getItem("hasOpened");
@@ -123,7 +128,7 @@ export default function App() {
                                 <Input
                                     size="sm"
                                     type="text"
-                                    value={newUsername}
+                                    value={newUsername?newUsername:newUsername}
                                     onChange={handleChange}
                                     errorMessage={error}
                                 />
