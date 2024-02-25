@@ -2,6 +2,7 @@ import {Button, Input} from "@nextui-org/react";
 import React, {useState} from "react";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+// import SendIcon from "@/app/chat/SendIcon";
 
 export default function SendMessage({ username, photoURL, uid, scroll }) {
     const [message, setMessage] = useState("");
@@ -29,7 +30,9 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
         <div className="p-4">
             <form className="flex space-x-4" onSubmit={(event) => sendMessage(event)}>
                 <Input className="flex-1" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)} errorMessage={error}/>
-                <Button className="p-6 h-14" color="secondary" type="submit">Send message</Button>
+                <Button className="p-6 h-14" color="secondary" type="submit">Send message
+                    {/*<SendIcon/>*/}
+                </Button>
             </form>
         </div>
     );

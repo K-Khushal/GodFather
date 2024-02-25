@@ -1,6 +1,6 @@
 //navbar
 export const nav_items = [
   { href: "/", key: "home", label: "Home" },
-  { href: "/forum", key: "forum", label: "Forum" },
+  { href: "/chat", key: "chat", label: "Chat" },
   { href: "/about", key: "about", label: "About Us" },
 ];

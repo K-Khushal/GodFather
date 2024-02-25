@@ -5,8 +5,8 @@ import {Input} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {HeartIcon} from './HeartIcon';
 import {Avatar} from "@nextui-org/react";
-import MessageList from "@/app/forum/MessageList";
-import SendMessage from "@/app/forum/SendMessage";
+import MessageList from "@/app/chat/MessageList";
+import SendMessage from "@/app/chat/SendMessage";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
 
 export default function App() {

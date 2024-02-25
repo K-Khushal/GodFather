@@ -7,7 +7,7 @@ import {
     limit,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import Message from "@/app/forum/Message";
+import Message from "@/app/chat/Message";
 
 export default function MessageList() {
 
