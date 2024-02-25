@@ -7,6 +7,8 @@ import {HeartIcon} from './HeartIcon';
 import {Avatar} from "@nextui-org/react";
 import MessageList from "@/app/forum/MessageList";
 import SendMessage from "@/app/forum/SendMessage";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
+
 export default function App() {
 
     const [username, setUsername] = useState(localStorage.getItem('username') || "");
@@ -16,6 +18,8 @@ export default function App() {
     const [uid, setUid] = useState(localStorage.getItem('uid') || null);
     const [photoURL, setPhotoURL] = useState(localStorage.getItem('photoURL') || "");
     const scroll = useRef();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [hasOpenedBefore, setHasOpenedBefore] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -45,6 +49,16 @@ export default function App() {
         }
     }, []);
 
+    useEffect(() => {
+        // const hasOpened = localStorage.getItem("hasOpened");
+        // if (!hasOpened) {
+        //     localStorage.setItem("hasOpened", true);
+        //     onOpen();
+        //     setHasOpenedBefore(true);
+        // }
+        onOpen();
+    }, [onOpen]);
+
     const generateRandomUid = () => {
         // Generate a random UID (for demonstration purposes only)
         return Math.floor(Math.random() * 10000).toString();
@@ -66,6 +80,12 @@ export default function App() {
             setError("This username is not allowed");
             return;
         }
+        else if (newUsername === username) {
+            setEditing(false);
+            setError(null);
+            return;
+        }
+
         setUsername(newUsername);
         localStorage.setItem('username', newUsername);
 
@@ -150,6 +170,26 @@ export default function App() {
                 <div className="border-t border-gray-200 dark:border-gray-800">
                     <SendMessage username={username} uid={uid} photoURL={photoURL} scroll={scroll}/>
                 </div>
+                        <Modal isOpen={isOpen} onClose={onClose}>
+                            <ModalContent>
+                                <>
+                                    <ModalHeader className="flex flex-col gap-1">Warning: Respectful Communication Policy</ModalHeader>
+                                    <ModalBody>
+                                        <p>
+                                            Please refrain from using offensive language, religious content, or anything that may hurt others. Treat everyone with kindness and respect. Let's create a positive and inclusive environment together. Thank you for your cooperation.
+                                        </p>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="danger" variant="light" onPress={onClose}>
+                                            I disagree
+                                        </Button>
+                                        <Button color="primary" onPress={onClose}>
+                                            I agree
+                                        </Button>
+                                    </ModalFooter>
+                                </>
+                            </ModalContent>
+                        </Modal>
             </div>
         </main>
     );
