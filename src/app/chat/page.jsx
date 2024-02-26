@@ -82,7 +82,11 @@ export default function App() {
             return;
         }
         else if (newUsername.trim().toLowerCase() === "itzkhushal") {
-            setError("This username is not allowed");
+            setError("Admin ka username nahi le skate ho bhaiya!");
+            return;
+        }
+        else if (newUsername.trim().toLowerCase() === "akshay") {
+            setError("Chal be chal, tu Akshay nahi hai!");
             return;
         }
         else if (newUsername === username) {
