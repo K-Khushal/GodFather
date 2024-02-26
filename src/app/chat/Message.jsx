@@ -14,7 +14,10 @@ export default function Message({ message }) {
 
     let timeAgo;
 
-    if (diffInSeconds < 60) {
+    if (diffInSeconds < 0) {
+        timeAgo = `0 seconds ago`;
+    }
+    else if (diffInSeconds < 60) {
         // Less than a minute
         timeAgo = `${diffInSeconds} seconds ago`;
     } else if (diffInSeconds < 3600) {
