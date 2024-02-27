@@ -8,7 +8,7 @@ import { nav_items } from "@/constants";
 export default function Header() {
   const path = usePathname();
   return (
-    <nav className="flex justify-between items-center h-24 px-8 md:px-24 bg-black text-slate-500 shadow-slate-500">
+    <nav className="flex justify-between items-center h-24 px-8 md:px-24 bg-none text-slate-500 shadow-slate-500">
       <div className="flex items-center">
         <img src="/gdscSSIU.png" alt="Forum" className="h-36 md:h-64 pt-3" />
         {/*<span className="text-2xl satisfy font-bold capitalise">Forum</span>*/}
