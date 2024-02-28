@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/app/Header";
 import Footer from "@/app/Footer";
 import AmongUs from "@/components/particles/AmongUs";
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
             <AmongUs />
             <Header />
             {children}
+            <Analytics />
             <Footer />
           </div>
         </Providers>
