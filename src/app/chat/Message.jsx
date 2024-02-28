@@ -58,7 +58,7 @@ export default function Message({ message }) {
                                 startContent={<CheckIcon size={18} />}
                                 variant="faded"
                                 color="success"
-                                className="bg-[#27272A] border-[#3F3F46] ml-2"
+                                className="ml-2"
                             >
                                 Admin
                             </Chip>
