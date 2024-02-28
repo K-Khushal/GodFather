@@ -186,7 +186,7 @@ export default function App() {
                 <div className="border-t border-gray-200 dark:border-gray-800">
                     <SendMessage username={username} uid={uid} photoURL={photoURL} scroll={scroll}/>
                 </div>
-                <Modal isOpen={isOpen} onClose={onClose} placement="top" isDismissable={false} isKeyboardDismissDisabled={true}>
+                <Modal isOpen={isOpen} onClose={onClose} placement="center" isDismissable={false} isKeyboardDismissDisabled={true}>
                     <ModalContent className="text-white bg-black">
                         <>
                             <ModalHeader className="flex flex-col gap-1">Warning: Respectful Communication Policy</ModalHeader>

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React from "react";
+import {Chip} from "@nextui-org/react";
+import {CheckIcon} from "./CheckIcon";
 
 
 export default function Message({ message }) {
@@ -49,7 +51,19 @@ export default function Message({ message }) {
             />
             <div className="flex-1 grid gap-1">
                 <div className="flex items-center space-x-2">
-                    <div className={`text-sm font-medium ${message.name === "Akshay" || message.name === "itzKhushal" ? "text-red-500" : ""}`}>{message.name}</div>
+                    <div className={`text-sm font-medium flex flex-row items-center justify-center ${message.name === "Akshay" || message.name === "itzKhushal" ? "text-red-500" : ""}`}>
+                        {message.name}
+                        {(message.name === "Akshay" || message.name === "itzKhushal") && (
+                            <Chip
+                                startContent={<CheckIcon size={18} />}
+                                variant="faded"
+                                color="success"
+                                className="bg-[#27272A] border-[#3F3F46] ml-2"
+                            >
+                                Admin
+                            </Chip>
+                        )}
+                    </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">{timeAgo}</div>
                 </div>
                 <div className="text-sm">
