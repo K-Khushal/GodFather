@@ -128,8 +128,8 @@ export default function App() {
     };
 
     return (
-        <main className="p-5 bg-black text-white">
-            <div className="flex flex-col md:h-[495px] h-screen rounded-lg border border-gray-200 dark:border-gray-800">
+        <main className="p-5">
+            <div className="flex flex-col md:h-[495px] h-screen rounded-lg border border-gray-200 dark:border-gray-800 bg-white/10">
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
                     <div className="flex flex-col sm:flex-row sm:justify-center items-center space-x-4">
                         <div className="font-semibold flex items-center">
