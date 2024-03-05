@@ -19,6 +19,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      textShadow: {
+        default: '0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff',
+      },
+      animation: {
+        shine: 'shine 3s infinite linear',
+      },
+      keyframes: {
+        shine: {
+          '0%': {'background-position': '0'},
+          '60%': {'background-position': '360px'},
+          '100%': {'background-position': '600px'},
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
