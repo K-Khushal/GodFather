@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { storage } from "../firebase";
 import ImageIcon from "./ImageIcon";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export default function SendMessage({ username, photoURL, uid, scroll }) {
     const [message, setMessage] = useState("");
     const [error, setError] = useState(null);
@@ -75,7 +75,7 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
             scroll.current.scrollIntoView({ behavior: "smooth" });
         }).finally(() => {
             setIsSending(false);
-            console.log("message send succesfuly")
+            console.log("message send successfully")
         });
     };
 
@@ -101,8 +101,7 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
                     onClick={() => document.querySelector('input[type="file"]').click()}
                 >
                     <ImageIcon/>
-                    {selectedFileName && <p>{selectedFileName}</p>}
-                </Button>
+                    {selectedFileName && <p className="w-min max-w-24 overflow-hidden text-overflow ellipsis whitespace-nowrap">{selectedFileName}</p>}                </Button>
 
                 <Button className="w-full sm:w-auto h-14" color="secondary" type="submit" disabled={isSending}>Send message
                     {/*<SendIcon/>*/}
