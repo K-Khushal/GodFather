@@ -1,8 +1,7 @@
-import Image from "next/image";
 import React from "react";
 import {Chip} from "@nextui-org/react";
 import {CheckIcon} from "./CheckIcon";
-
+import {Image} from "@nextui-org/react";
 
 export default function Message({ message }) {
 
@@ -69,6 +68,15 @@ export default function Message({ message }) {
                 <div className="text-sm">
                     {message.text}
                 </div>
+                {message.image && (
+                    <Image
+                        isZoomed
+                        width={300}
+                        alt="Uploaded file"
+                        src={message.image}
+                        fallbackSrc="https://via.placeholder.com/300x200"
+                    />
+                )}
             </div>
         </div>
     )

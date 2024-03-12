@@ -3,7 +3,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: [ "robohash.org", "live.staticflickr.com"]
+        domains: [ "robohash.org", "live.staticflickr.com", "firebasestorage.googleapis.com"]
     },
 }
 export default nextConfig;
