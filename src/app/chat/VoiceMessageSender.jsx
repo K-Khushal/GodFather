@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Button } from '@nextui-org/react';
 import { db, storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-
-function VoiceMessageSender({ uid, onAudioUpload }) {
+import MicIcon from "@/app/chat/MicIcon";
+function VoiceMessageSender({ uid, onAudioUpload, onClearAudio }) {
     const [isRecording, setIsRecording] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState(null);
     const [recordedBlobs, setRecordedBlobs] = useState([]);
@@ -67,19 +66,30 @@ function VoiceMessageSender({ uid, onAudioUpload }) {
             handleStartRecording();
             setIsRecording(true);
         }
+        setIsRecording(!isRecording);
     };
 
     const handleClearAudio = () => {
         setRecordedBlobs([]);
+        onClearAudio();
     };
 
     return (
-        <div>
-            <Button onClick={handleStartStopRecording}>
-                {isRecording ? 'Stop Recording' : 'Start Recording'}
-            </Button>
+        <div className="flex flex-row justify-center items-center gap-2">
+            {/*<Button onClick={handleStartStopRecording}>*/}
+            {/*    {isRecording ? 'Stop Recording' : 'Start Recording'}*/}
+            {/*</Button>*/}
             <Button onClick={handleClearAudio}>
                 Clear Audio
+            </Button>
+            <Button className="text-gray-400 h-14 relative" variant="ghost" onClick={handleStartStopRecording}>
+                <MicIcon className="h-7 w-7"/>
+                {isRecording ?
+                <span className="absolute top-2 right-4 h-3 w-3 flex items-center justify-center rounded-full bg-red-500">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                </span>
+                    : null
+                }
             </Button>
         </div>
     );
