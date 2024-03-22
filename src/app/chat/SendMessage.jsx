@@ -8,6 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import VoiceMessageSender from "@/app/chat/VoiceMessageSender";
 import AudioPlayer from "@/app/chat/AudioPlayer";
 import {Spinner} from "@nextui-org/react";
+import SendIcon from "@/app/chat/SendIcon";
 export default function SendMessage({ username, photoURL, uid, scroll }) {
     const [message, setMessage] = useState("");
     const [error, setError] = useState(null);
@@ -135,9 +136,8 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
                 <VoiceMessageSender uid={uid} onAudioUpload={handleAudioUpload}/>
                 {audio && <AudioPlayer url={audio} />}
 
-                <Button className="w-full sm:w-auto h-14" color="secondary" type="submit" disabled={isSending}>
-                    {/*<SendIcon/>*/}
-                    {isSending ? <Spinner color="success"/> : "Send message"}
+                <Button className="w-full sm:w-auto h-14" color="secondary" type="submit" disabled={isSending} size="icon">
+                    {isSending ? <Spinner color="default"/> : <SendIcon className="h-7 w-8" />}
                 </Button>
             </form>
         </div>
