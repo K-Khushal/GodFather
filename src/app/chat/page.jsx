@@ -184,7 +184,7 @@ export default function App() {
                     <span ref={scroll}></span>
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-800">
-                    <SendMessage username={username} uid={uid} photoURL={photoURL} scroll={scroll}/>
+                    <SendMessage username={username} uid={uid} photoURL={photoURL}/>
                 </div>
                 <Modal isOpen={isOpen} onClose={onClose} placement="center" isDismissable={false} isKeyboardDismissDisabled={true}>
                     <ModalContent className="text-white">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@nextui-org/react';
-import { db, storage } from "../firebase";
+import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import MicIcon from "@/app/chat/MicIcon";
 function VoiceMessageSender({ uid, onAudioUpload, onClearAudio }) {

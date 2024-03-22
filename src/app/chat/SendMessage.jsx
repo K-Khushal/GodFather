@@ -9,7 +9,7 @@ import VoiceMessageSender from "@/app/chat/VoiceMessageSender";
 import AudioPlayer from "@/app/chat/AudioPlayer";
 import {Spinner} from "@nextui-org/react";
 import SendIcon from "@/app/chat/SendIcon";
-export default function SendMessage({ username, photoURL, uid, scroll }) {
+export default function SendMessage({ username, photoURL, uid}) {
     const [message, setMessage] = useState("");
     const [error, setError] = useState(null);
     const [isSending, setIsSending] = useState(false);
