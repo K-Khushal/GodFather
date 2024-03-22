@@ -2,6 +2,7 @@ import React from "react";
 import {Chip} from "@nextui-org/react";
 import {CheckIcon} from "./CheckIcon";
 import {Image} from "@nextui-org/react";
+import AudioPlayer from "@/app/chat/AudioPlayer";
 
 export default function Message({ message }) {
 
@@ -77,6 +78,8 @@ export default function Message({ message }) {
                         fallbackSrc="https://via.placeholder.com/300x200"
                     />
                 )}
+                {message.audio && <AudioPlayer url={message.audio} />}
+
             </div>
         </div>
     )

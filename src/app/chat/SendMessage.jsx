@@ -5,11 +5,15 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { storage } from "../firebase";
 import ImageIcon from "./ImageIcon";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import VoiceMessageSender from "@/app/chat/VoiceMessageSender";
+import AudioPlayer from "@/app/chat/AudioPlayer";
+import {Spinner} from "@nextui-org/react";
 export default function SendMessage({ username, photoURL, uid, scroll }) {
     const [message, setMessage] = useState("");
     const [error, setError] = useState(null);
     const [isSending, setIsSending] = useState(false);
     const [file, setFile] = useState(null);
+    const [audio, setAudio] = useState(null);
     const [selectedFileName, setSelectedFileName] = useState("");
 
     const forbiddenWordsSet = new Set([
@@ -51,38 +55,63 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
         setError(null);
 
         let imageUrl = null; // Define imageUrl here
+        let audioUrl = audio;
 
-        if (file) {
-            const storageRef = ref(storage);
-            const imageRef = ref(storageRef, file.name);
-            await uploadBytes(imageRef, file);
-            imageUrl = await getDownloadURL(imageRef); // Assign the URL to imageUrl
-        }
+        try {
+            const uploadPromises = [];
 
-        await addDoc(collection(db, "messages"), {
-            text: message,
-            name: username,
-            avatar: photoURL,
-            image: imageUrl,
-            createdAt: serverTimestamp(),
-            uid,
-        }).then(() => {
-            console.log("message did not send")
+            if (file) {
+                const storageRef = ref(storage);
+                const imageRef = ref(storageRef, file.name);
+                const uploadImagePromise = uploadBytes(imageRef, file)
+                    .then(() => getDownloadURL(imageRef)); // Assign the URL to imageUrl
+                uploadPromises.push(uploadImagePromise);
+            }
+
+            await Promise.all(uploadPromises)
+                .then(([uploadedImageUrl]) => {
+                    imageUrl = uploadedImageUrl;
+                });
+
+            const messageData = {
+                text: message,
+                name: username,
+                avatar: photoURL,
+                createdAt: serverTimestamp(),
+                uid,
+            };
+
+            if (imageUrl) {
+                messageData.image = imageUrl;
+            }
+
+            if (audioUrl) {
+                messageData.audio = audioUrl;
+            }
+
+            await addDoc(collection(db, "messages"), messageData);
+        } catch (error) {
+            console.error('Error sending message:', error);
+        } finally {
+            setIsSending(false);
             setMessage("");
             setFile(null); // Clear the file
+            setAudio(null); // Clear the audio
             setSelectedFileName(""); // Clear the file name
-            document.querySelector('input[type="file"]').value = "";
-            scroll.current.scrollIntoView({ behavior: "smooth" });
-        }).finally(() => {
-            setIsSending(false);
-            console.log("message send successfully")
-        });
+        }
     };
 
     const handleImageUpload = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile); // Set the selected file
         setSelectedFileName(selectedFile ? selectedFile.name : ""); // Set the selected file name
+    };
+
+    const handleAudioUpload = (audioUrl) => {
+        // Do something with audioUrl here
+        setAudio(null);
+        console.log(audioUrl);
+        setAudio(audioUrl);
     };
 
     return (
@@ -103,8 +132,12 @@ export default function SendMessage({ username, photoURL, uid, scroll }) {
                     <ImageIcon/>
                     {selectedFileName && <p className="w-min max-w-24 overflow-hidden text-overflow ellipsis whitespace-nowrap">{selectedFileName}</p>}                </Button>
 
-                <Button className="w-full sm:w-auto h-14" color="secondary" type="submit" disabled={isSending}>Send message
+                <VoiceMessageSender uid={uid} onAudioUpload={handleAudioUpload}/>
+                {audio && <AudioPlayer url={audio} />}
+
+                <Button className="w-full sm:w-auto h-14" color="secondary" type="submit" disabled={isSending}>
                     {/*<SendIcon/>*/}
+                    {isSending ? <Spinner color="success"/> : "Send message"}
                 </Button>
             </form>
         </div>
