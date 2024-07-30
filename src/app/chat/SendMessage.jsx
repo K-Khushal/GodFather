@@ -123,22 +123,22 @@ export default function SendMessage({ username, photoURL, uid}) {
         <div className="p-4">
             <form className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4" onSubmit={(event) => sendMessage(event)}>
                 <Input className="flex-1" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)} errorMessage={error}/>
-                <input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    onChange={handleImageUpload}
-                />
-                <Button
-                    className="text-gray-400 h-14"
-                    variant="ghost"
-                    onClick={() => document.querySelector('input[type="file"]').click()}
-                >
-                    <ImageIcon className="h-7 w-7"/>
-                    {selectedFileName && <p className="w-min max-w-24 overflow-hidden text-overflow ellipsis whitespace-nowrap">{selectedFileName}</p>}                </Button>
+                {/*<input*/}
+                {/*    type="file"*/}
+                {/*    accept="image/*"*/}
+                {/*    style={{ display: 'none' }}*/}
+                {/*    onChange={handleImageUpload}*/}
+                {/*/>*/}
+                {/*<Button*/}
+                {/*    className="text-gray-400 h-14"*/}
+                {/*    variant="ghost"*/}
+                {/*    onClick={() => document.querySelector('input[type="file"]').click()}*/}
+                {/*>*/}
+                {/*    <ImageIcon className="h-7 w-7"/>*/}
+                {/*    {selectedFileName && <p className="w-min max-w-24 overflow-hidden text-overflow ellipsis whitespace-nowrap">{selectedFileName}</p>}                </Button>*/}
 
-                <VoiceMessageSender uid={uid} onAudioUpload={handleAudioUpload} onClearAudio={handleClearAudio} />
-                {audio && <AudioPlayer url={audio}/>}
+                {/*<VoiceMessageSender uid={uid} onAudioUpload={handleAudioUpload} onClearAudio={handleClearAudio} />*/}
+                {/*{audio && <AudioPlayer url={audio}/>}*/}
 
                 <Button className="w-full sm:w-auto h-14" color="secondary" type="submit" disabled={isSending} size="icon">
                     {isSending ? <Spinner color="default"/> : <SendIcon className="h-7 w-8" />}

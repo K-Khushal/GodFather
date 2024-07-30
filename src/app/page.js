@@ -12,13 +12,13 @@ export default function Home() {
   return (
     <main className="text-center">
         <div className="flex flex-col justify-center items-center py-20">
-            <AnimatedText text="CLOUD" />
-            <AnimatedText text="CARNIVAL" />
-            <a href="https://gdsc.community.dev/events/details/developer-student-clubs-swarrnim-startup-innovation-university-gandhinagar-presents-cloud-carnival/"
-               className="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 mt-10 p-4 bg-secondary rounded-2xl flex gap-2 items-center">
-                Register
-                <FaArrowRight size={16} />
-            </a>
+            <AnimatedText text="Welcome to" />
+            <AnimatedText text="SSIU" />
+            {/*<a href="https://gdsc.community.dev/events/details/developer-student-clubs-swarrnim-startup-innovation-university-gandhinagar-presents-cloud-carnival/"*/}
+            {/*   className="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 mt-10 p-4 bg-secondary rounded-2xl flex gap-2 items-center">*/}
+            {/*    Register*/}
+            {/*    <FaArrowRight size={16} />*/}
+            {/*</a>*/}
         </div>
         {/*<div className="flex flex-col md:flex-row items-center justify-center md:gap-10 ">*/}
         {/*    <TypewriterEffectSmooth*/}

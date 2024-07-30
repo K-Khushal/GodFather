@@ -10,7 +10,7 @@ export default function Team() {
                 </div>
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-                    {team_details.map((teamMember, index) => (
+                    {team_details.sort((a, b) => a.name.localeCompare(b.name)).map((teamMember, index) => (
                         <div key={index} className="p-6 rounded-lg flex flex-col items-center">
                             <Image
                                 alt={teamMember.name}
